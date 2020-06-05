@@ -1,10 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint --fix"
   },
   "dependencies": {
     "jest": "^26.0.1",
+    "mkdirp": "^1.0.4",
     "puppeteer": "^3.3.0",
     "rimraf": "^3.0.2"
   },

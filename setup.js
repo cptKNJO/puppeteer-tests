@@ -7,8 +7,8 @@ const os = require('os');
 
 const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
 
-module.exports = async function () {
-  const browser = await puppeteer.launch();
+module.exports = async () => {
+  const browser = await puppeteer.launch({});
   // store the browser instance so we can teardown it later
   // this global is only available in the teardown but not in TestEnvironments
   global.__BROWSER_GLOBAL__ = browser;

@@ -10,11 +10,14 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     document: 'readonly',
+    location: 'readonly',
+    window: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 11,
   },
   rules: {
     'no-underscore-dangle': 'off',
+    "no-restricted-globals": ["off"]
   },
 };

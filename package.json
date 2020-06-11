@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
+    "debug": "HEADLESS=false jest --runInBand --detectOpenHandles",
     "lint": "eslint .",
     "lint:fix": "npm run lint --fix"
   },

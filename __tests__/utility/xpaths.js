@@ -1,4 +1,4 @@
 module.exports = {
   backToTop: '//span[text()="Back to top"]',
-  login: '//button[text()="Log in"]',
+  loginBtn: '//button[text()="Log in"]',
 };

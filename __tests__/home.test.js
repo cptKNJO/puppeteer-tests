@@ -1,7 +1,7 @@
 const {
   logo, heroText, planet, loadMoreBtn,
 } = require('./utility/selectors');
-const { backToTop, login } = require('./utility/xpaths');
+const { backToTop } = require('./utility/xpaths');
 const { timeout } = require('./utility/config');
 
 describe.only(
@@ -10,6 +10,7 @@ describe.only(
     let page;
     beforeAll(async () => {
       page = await global.__BROWSER__.newPage();
+      await page.setViewport({ width: 960, height: 800 });
     }, timeout);
 
     beforeEach(async () => {
@@ -25,9 +26,12 @@ describe.only(
       expect(text).toMatch('Space Advisor');
     });
 
-    it('hero headline space & beyond visible', async () => {
-      const text = await page.$eval(heroText, (h1) => h1.textContent);
-      expect(text).toMatch('Space & Beyond');
+    it('hero headline and title match', async () => {
+      const hero = await page.$eval(heroText, (h1) => h1.textContent);
+      expect(hero).toMatch('Space & Beyond');
+
+      const title = await page.title();
+      expect(title).toMatch(hero);
     });
 
     it('shows 6 planets initially', async () => {
@@ -42,7 +46,8 @@ describe.only(
       expect(planets).toHaveLength(6);
 
       await page.waitForSelector(loadMoreBtn);
-      await page.click(loadMoreBtn);
+      await page.focus(loadMoreBtn);
+      await page.keyboard.press('Enter');
 
       planets = await page.$$(planet);
       expect(planets).toHaveLength(9);
@@ -86,14 +91,6 @@ describe.only(
         encoding: 'base64',
       });
       expect(start).toEqual(end);
-    });
-
-    it('shows login text at the top', async () => {
-      await page.waitForFunction('window.pageYOffset === 0');
-      await page.waitForXPath(login);
-      const buttonHandle = (await page.$x(login))[0];
-      const text = await buttonHandle.evaluate((btn) => btn.innerText);
-      expect(text).toBe('LOG IN');
     });
   },
   timeout,

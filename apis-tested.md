@@ -1,5 +1,20 @@
 # APIs Tested
 
+## class: BrowserContext
+
+1. event: 'targetchanged'
+2. event: 'targetcreated'
+3. event: 'targetdestroyed'
+4. browserContext.browser()
+5. browserContext.clearPermissionOverrides() :heavy_check_mark:
+6. browserContext.close() :heavy_check_mark:
+7. browserContext.isIncognito() :heavy_check_mark:
+8. browserContext.newPage() :heavy_check_mark:
+9. browserContext.overridePermissions(origin, permissions) :heavy_check_mark:
+10. browserContext.pages() :heavy_check_mark:
+11. browserContext.targets() :heavy_check_mark:
+12. browserContext.waitForTarget(predicate[, options])
+
 ## class: Page
 
 1. event: 'close'
@@ -35,10 +50,10 @@
 31. page.click(selector, options) :heavy_check_mark:
 32. page.close(options) :heavy_check_mark:
 33. page.content()
-34. page.cookies(...urls)
+34. page.cookies(...urls) :heavy_check_mark:
 35. page.coverage
-36. page.deleteCookie(...cookies)
-37. page.emulate(options)
+36. page.deleteCookie(...cookies) :heavy_check_mark:
+37. page.emulate(options) :heavy_check_mark:
 38. page.emulateMedia(type)
 39. page.emulateMediaFeatures(features)
 40. page.emulateMediaType(type)
@@ -46,7 +61,7 @@
 42. page.evaluate(pageFunction[, ...args]) :heavy_check_mark:
 43. page.evaluateHandle(pageFunction[, ...args]) :heavy_check_mark:
 44. page.evaluateOnNewDocument(pageFunction[, ...args])
-45. page.exposeFunction(name, puppeteerFunction)
+45. page.exposeFunction(name, puppeteerFunction) :heavy_check_mark:
 46. page.focus(selector) :heavy_check_mark:
 47. page.frames()
 48. page.goBack(options) :heavy_check_mark:
@@ -66,15 +81,15 @@
 62. page.setBypassCSP(enabled)
 63. page.setCacheEnabled(enabled)
 64. page.setContent(html, options)
-65. page.setCookie(...cookies)
-66. page.setDefaultNavigationTimeout(timeout)
-67. page.setDefaultTimeout(timeout)
+65. page.setCookie(...cookies) :heavy_check_mark:
+66. page.setDefaultNavigationTimeout(timeout) :heavy_check_mark:
+67. page.setDefaultTimeout(timeout) :heavy_check_mark:
 68. page.setExtraHTTPHeaders(headers)
 69. page.setGeolocation(options)
 70. page.setJavaScriptEnabled(enabled)
 71. page.setOfflineMode(enabled)
 72. page.setRequestInterception(value)
-73. page.setUserAgent(userAgent)
+73. page.setUserAgent(userAgent) :heavy_check_mark:
 74. page.setViewport(viewport) :heavy_check_mark:
 75. page.tap(selector)
 76. page.target()
@@ -82,12 +97,12 @@
 78. page.touchscreen
 79. page.tracing
 80. page.type(selector, text, options)
-81. page.url()
-82. page.viewport()
+81. page.url() :heavy_check_mark:
+82. page.viewport() :heavy_check_mark:
 83. page.waitFor(selectorOrFunctionOrTimeout[, options[, ...args]]) :heavy_check_mark:
 84. page.waitForFileChooser(options)
 85. page.waitForFunction(pageFunction, [, options[, ...args]]) :heavy_check_mark:
-86. page.waitForNavigation(options) 1
+86. page.waitForNavigation(options) :heavy_check_mark:
 87. page.waitForRequest(urlOrPredicate, options)
 88. page.waitForResponse(urlOrPredicate, options)
 89. page.waitForSelector(selector, options) :heavy_check_mark:
@@ -131,7 +146,7 @@
 21. elementHandle.press(key[, options])]
 22. elementHandle.screenshot([options])]
 23. elementHandle.select(...values)]
-24. elementHandle.tap()]
+24. elementHandle.tap()] :heavy_check_mark:
 25. elementHandle.toString()]
 26. elementHandle.type(text[, options])]
 27. elementHandle.uploadFile(...filePaths)]

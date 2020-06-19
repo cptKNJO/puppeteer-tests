@@ -2,19 +2,20 @@ const {
   logo, heroText, planet, loadMoreBtn,
 } = require('./utility/selectors');
 const { backToTop } = require('./utility/xpaths');
-const { timeout } = require('./utility/config');
+const { baseUrl, timeout } = require('./utility/config');
 
-describe.only(
+describe(
   'Home page',
   () => {
     let page;
     beforeAll(async () => {
       page = await global.__BROWSER__.newPage();
       await page.setViewport({ width: 960, height: 800 });
+      await page.setDefaultTimeout(timeout);
     }, timeout);
 
     beforeEach(async () => {
-      await page.goto('http://demo.testim.io/');
+      await page.goto(baseUrl);
     }, timeout);
 
     afterAll(async () => {
@@ -84,7 +85,10 @@ describe.only(
 
       await buttonHandle.click();
       const bodyHandle = await page.evaluateHandle(() => document.body);
-      const pageHeight = await page.evaluate((el) => el.scrollHeight, bodyHandle);
+      const pageHeight = await page.evaluate(
+        (el) => el.scrollHeight,
+        bodyHandle,
+      );
       await page.waitForFunction(`${pageHeight} > 1900`);
 
       const end = await page.screenshot({

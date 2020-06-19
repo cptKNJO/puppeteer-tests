@@ -11,7 +11,8 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
     document: 'readonly',
     location: 'readonly',
-    window: 'readonly'
+    window: 'readonly',
+    navigator: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 11,

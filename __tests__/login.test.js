@@ -1,6 +1,12 @@
-const { login } = require('./utility/selectors');
-const { loginBtn } = require('./utility/xpaths');
-const { timeout } = require('./utility/config');
+const faker = require('faker');
+const { login, profileBtn } = require('./utility/selectors');
+const { loginBtn, logoutBtn } = require('./utility/xpaths');
+const { baseUrl, timeout } = require('./utility/config');
+
+const user = {
+  username: faker.internet.userName(),
+  password: faker.internet.password(),
+};
 
 describe(
   'Log in',
@@ -9,10 +15,11 @@ describe(
     beforeAll(async () => {
       page = await global.__BROWSER__.newPage();
       await page.setViewport({ width: 960, height: 800 });
+      page.setDefaultNavigationTimeout(timeout);
     }, timeout);
 
     beforeEach(async () => {
-      await page.goto('http://demo.testim.io/');
+      await page.goto(baseUrl);
     }, timeout);
 
     afterAll(async () => {
@@ -35,8 +42,13 @@ describe(
       await page.waitForNavigation();
       await page.waitFor(login.card);
 
-      const loginSection = await page.evaluateHandle((el) => document.querySelector(el), login.card);
-      const text = await loginSection.evaluate((el) => el.querySelector('h2').textContent);
+      const loginSection = await page.evaluateHandle(
+        (el) => document.querySelector(el),
+        login.card,
+      );
+      const text = await loginSection.evaluate(
+        (el) => el.querySelector('h2').textContent,
+      );
       expect(text).toBe('Login');
     });
 
@@ -45,11 +57,13 @@ describe(
       expect(await page.isClosed()).toBeTruthy();
 
       page = await global.__BROWSER__.newPage();
-      await page.goto('http://demo.testim.io/login');
+      await page.goto(`${baseUrl}/login`);
       await page.waitFor(login.card);
 
       const loginSection = await page.$(login.card);
-      const text = await loginSection.evaluate((el) => el.querySelector('h2').textContent);
+      const text = await loginSection.evaluate(
+        (el) => el.querySelector('h2').textContent,
+      );
       expect(text).toBe('Login');
     });
 
@@ -58,7 +72,9 @@ describe(
       await page.keyboard.press('Enter');
 
       const loginSection = await page.$(login.card);
-      const text = await loginSection.evaluate((el) => el.querySelector('h2').textContent);
+      const text = await loginSection.evaluate(
+        (el) => el.querySelector('h2').textContent,
+      );
       expect(text).toBe('Login');
     });
 
@@ -79,7 +95,7 @@ describe(
     });
 
     it('cancelling login works', async () => {
-      await page.goto('http://demo.testim.io/login');
+      await page.goto(`${baseUrl}/login`);
       const loginSection = await page.$(login.card);
       expect(await loginSection.isIntersectingViewport()).toBeTruthy();
 
@@ -113,12 +129,12 @@ describe(
     });
 
     it('clears input field username when page is refreshed', async () => {
-      await page.goto('http://demo.testim.io/login');
+      await page.goto(`${baseUrl}/login`);
       let usernameInput = await page.$(login.usernameInput);
-      await usernameInput.type('user', { delay: 100 });
+      await usernameInput.type(user.username, { delay: 50 });
       let property = await usernameInput.getProperty('value');
       let value = await property.jsonValue();
-      expect(value).toEqual('user');
+      expect(value).toEqual(user.username);
 
       await page.reload();
       usernameInput = await page.$(login.usernameInput);
@@ -128,12 +144,12 @@ describe(
     });
 
     it('clears input field password when page is refreshed', async () => {
-      await page.goto('http://demo.testim.io/login');
+      await page.goto(`${baseUrl}/login`);
       let passwordInput = await page.$(login.passwordInput);
-      await passwordInput.type('password', { delay: 100 });
+      await passwordInput.type(user.password, { delay: 50 });
       let property = await passwordInput.getProperty('value');
       let value = await property.jsonValue();
-      expect(value).toEqual('password');
+      expect(value).toEqual(user.password);
 
       await page.reload();
       passwordInput = await page.$(login.passwordInput);
@@ -143,18 +159,18 @@ describe(
     });
 
     it('clears input if closed', async () => {
-      await page.goto('http://demo.testim.io/login');
+      await page.goto(`${baseUrl}/login`);
       let usernameInput = await page.$(login.usernameInput);
-      await usernameInput.type('user', { delay: 100 });
+      await usernameInput.type(user.username, { delay: 50 });
       let property = await usernameInput.getProperty('value');
       let value = await property.jsonValue();
-      expect(value).toEqual('user');
+      expect(value).toEqual(user.username);
 
       await page.close();
       expect(await page.isClosed()).toBeTruthy();
 
       page = await global.__BROWSER__.newPage();
-      await page.goto('http://demo.testim.io/login');
+      await page.goto(`${baseUrl}/login`);
 
       usernameInput = await page.$(login.usernameInput);
       property = await usernameInput.getProperty('value');
@@ -162,16 +178,23 @@ describe(
       expect(value).toEqual('');
     });
 
-    it('typing credentials works', async () => {
-    });
+    it('logs out properly', async () => {
+      await page.goto(`${baseUrl}/login`);
+      const usernameInput = await page.$(login.usernameInput);
+      await usernameInput.type(user.username, { delay: 50 });
 
-    it('using keypresses for typing works', async () => {
-    });
+      const passwordInput = await page.$(login.passwordInput);
+      await passwordInput.type(user.password, { delay: 50 });
 
-    it('no login on empty field', async () => {
-    });
+      await page.click(login.submitBtn);
 
-    it('logging out works', async () => {
+      await page.waitForSelector(profileBtn);
+      await page.click(profileBtn);
+      await page.waitForXPath(logoutBtn);
+      const linkHandle = (await page.$x(logoutBtn))[0];
+      await linkHandle.click();
+
+      await page.waitFor(loginBtn);
     });
   },
   timeout,

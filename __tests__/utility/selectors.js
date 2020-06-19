@@ -10,4 +10,9 @@ module.exports = {
     usernameInput: '.Login__login___3HOEm input[type=text]',
     passwordInput: '.Login__login___3HOEm input[type=password',
   },
+  profileBtn: '.mui-caret',
+  slider: {
+    bar: '.theme__progress___xkm0P',
+    knob: '.theme__knob____QAHG',
+  },
 };

@@ -10,7 +10,7 @@ const user = {
 };
 
 describe(
-  'User agent, page content, timezone',
+  'User agent, page content, timezone, and javascript',
   () => {
     let page;
     beforeAll(async () => {
@@ -76,6 +76,17 @@ describe(
         () => Intl.DateTimeFormat().resolvedOptions().timeZone,
       );
       expect(initialTz).not.toBe(finalTz);
+    });
+
+    it('can disable and enable javascript', async () => {
+      await page.setJavaScriptEnabled(false);
+      expect(page.isJavaScriptEnabled()).toBeFalsy();
+      await page.setJavaScriptEnabled(true);
+      expect(page.isJavaScriptEnabled()).toBeTruthy();
+    });
+
+    it('has javascript enabled', async () => {
+      expect(page.isJavaScriptEnabled()).toBeTruthy();
     });
   },
   timeout,

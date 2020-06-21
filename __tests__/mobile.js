@@ -1,5 +1,7 @@
 const { devices } = require('puppeteer');
-const { planet, loadMoreBtn } = require('./utility/selectors');
+const {
+  planet, loadMoreBtn, login,
+} = require('./utility/selectors');
 const { loginBtn } = require('./utility/xpaths');
 const { baseUrl, timeout } = require('./utility/config');
 
@@ -7,12 +9,12 @@ describe(
   'Mobile view',
   () => {
     let page;
-    beforeAll(async () => {
+    beforeEach(async () => {
       page = await global.__BROWSER__.newPage();
       await page.setDefaultNavigationTimeout(timeout);
     }, timeout);
 
-    afterAll(async () => {
+    afterEach(async () => {
       await page.close();
     });
 
@@ -46,7 +48,7 @@ describe(
       await page.waitForXPath(loginBtn);
       const buttonHandle = (await page.$x(loginBtn))[0];
       await buttonHandle.tap();
-      await page.waitForNavigation();
+      await page.waitForSelector(login.card);
 
       expect(page.url()).not.toBe(`${baseUrl}/`);
     });

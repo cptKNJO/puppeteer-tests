@@ -1,4 +1,6 @@
+const { testTimeout } = require('../../jest.config');
+
 module.exports = {
   baseUrl: 'http://demo.testim.io',
-  timeout: 30000,
+  timeout: testTimeout,
 };

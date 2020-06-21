@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest --runInBand",
-    "debug": "HEADLESS=false jest --runInBand",
+    "test": "jest",
+    "test:debug": "HEADLESS=false jest --runInBand",
     "lint": "eslint .",
     "lint:fix": "npm run lint --fix"
   },

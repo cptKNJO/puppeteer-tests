@@ -12,13 +12,13 @@ module.exports = {
     document: 'readonly',
     location: 'readonly',
     window: 'readonly',
-    navigator: 'readonly'
+    navigator: 'readonly',
   },
   parserOptions: {
     ecmaVersion: 11,
   },
   rules: {
     'no-underscore-dangle': 'off',
-    "no-restricted-globals": ["off"]
+    'no-restricted-globals': ['off'],
   },
 };

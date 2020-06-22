@@ -186,7 +186,9 @@ describe(
       const passwordInput = await page.$(login.passwordInput);
       await passwordInput.type(user.password, { delay: 50 });
 
-      await page.click(login.submitBtn);
+      await page.hover(login.submitBtn);
+      await page.mouse.down();
+      await page.mouse.up();
 
       await page.waitForSelector(profileBtn);
       await page.click(profileBtn);

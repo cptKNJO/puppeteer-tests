@@ -147,9 +147,8 @@ describe(
   'Permissions',
   () => {
     let page;
-    let context;
     beforeAll(async () => {
-      context = global.__BROWSER__.defaultBrowserContext();
+      const context = global.__BROWSER__.defaultBrowserContext();
       page = await context.newPage();
     }, timeout);
 
@@ -167,6 +166,7 @@ describe(
       );
       expect(notGranted).not.toBe('granted');
 
+      const context = page.browserContext();
       context.clearPermissionOverrides();
       await context.overridePermissions(baseUrl, ['geolocation']);
 
@@ -182,6 +182,7 @@ describe(
       );
       expect(notGranted).not.toBe('granted');
 
+      const context = page.browserContext();
       context.clearPermissionOverrides();
       await context.overridePermissions(baseUrl, ['camera']);
 
@@ -192,6 +193,7 @@ describe(
     });
 
     it('can run in incognito mode', async () => {
+      const context = page.browserContext();
       expect(context.isIncognito()).toBeFalsy();
       try {
         await context.close();

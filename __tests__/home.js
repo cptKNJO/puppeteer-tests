@@ -61,7 +61,9 @@ describe(
       let disabled = await propertyHandle.jsonValue();
       expect(disabled).toBeFalsy();
 
-      await loadBtn.click();
+      await page.hover(loadMoreBtn);
+      await page.mouse.down();
+      await page.mouse.up();
       propertyHandle = await loadBtn.getProperty('disabled');
       disabled = await propertyHandle.jsonValue();
       expect(disabled).toBeTruthy();

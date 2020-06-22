@@ -102,6 +102,8 @@ describe(
   'Mouse buttons',
   () => {
     let page;
+    const mouseButton = ['left', 'middle', 'right'];
+    let clickedButton;
     beforeAll(async () => {
       page = await global.__BROWSER__.newPage();
       await page.setViewport({ width: 960, height: 800 });
@@ -112,21 +114,30 @@ describe(
       await page.waitFor(logo);
     }, timeout);
 
+    afterEach(async () => {
+      await page.removeAllListeners('dialog');
+    }, timeout);
+
     afterAll(async () => {
       await page.close();
     });
 
-    it('shows context menu on right click', async () => {
-      const beforeClick = await page.screenshot({
-        encoding: 'base64',
+    it('registers right click', async () => {
+      await page.evaluate(() => {
+        document.body.addEventListener('mousedown', (event) => {
+          window.alert(event.which); // eslint-disable-line
+        });
       });
-      await page.click(loadMoreBtn, {
+      page.on('dialog', async (dialog) => {
+        clickedButton = mouseButton[Number(dialog.message()) - 1];
+        await dialog.dismiss();
+      });
+
+      await page.mouse.click(0, 0, {
         button: 'right',
       });
-      const afterClick = await page.screenshot({
-        encoding: 'base64',
-      });
-      expect(afterClick).not.toBe(beforeClick);
+
+      expect(clickedButton).toBe('right');
     });
 
     it('does not load more planets on right click', async () => {
@@ -142,9 +153,7 @@ describe(
       expect(planets).not.toHaveLength(9);
     });
 
-    it('scrolls on middle click', async () => {
-      const mouseButton = ['left', 'middle', 'right'];
-      let clickedButton;
+    it('registers middle click', async () => {
       await page.evaluate(() => {
         document.body.addEventListener('mousedown', (event) => {
           window.alert(event.which); // eslint-disable-line

@@ -4,5 +4,5 @@ module.exports = {
   testEnvironment: './puppeteer_environment.js',
   testMatch: ['**/__tests__/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
   testTimeout: 20000,
-  maxWorkers: '50%',
+  // maxWorkers: '50%',
 };

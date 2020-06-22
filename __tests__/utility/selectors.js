@@ -13,6 +13,6 @@ module.exports = {
   profileBtn: '.mui-caret',
   slider: {
     bar: '.theme__progress___xkm0P',
-    knob: '.theme__knob____QAHG',
+    knob: '.theme__innerknob___20XNj',
   },
 };

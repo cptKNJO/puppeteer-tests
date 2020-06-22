@@ -157,7 +157,9 @@ describe(
     }, timeout);
 
     afterAll(async () => {
+      const context = page.browserContext();
       await page.close();
+      await context.close();
     });
 
     it('allows access to location', async () => {
@@ -231,6 +233,8 @@ describe(
 
       expect(targets[1].type()).toBe('page');
       expect(targets[1].url()).toBe(secondPage.url());
+
+      await incognitoContext.close();
     });
   },
   timeout,

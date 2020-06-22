@@ -9,7 +9,7 @@ const user = {
   name: faker.name.findName(),
   email: faker.internet.email(),
   ssn: '123-12-1234',
-  phone: faker.phone.phoneNumberFormat(2),
+  phone: faker.phone.phoneNumberFormat(1),
   userAgent: faker.internet.userAgent(),
 };
 
@@ -45,7 +45,7 @@ describe(
 
     it('allows correct destination to be selected', async () => {
       // Will be 1 and 7 for returning
-      const departingDate = new Date(2020, new Date().getMonth() + 1);
+      const departingDate = new Date(2020, new Date().getMonth() + 1, 1);
       const month = departingDate.toLocaleString('default', { month: 'short' });
 
       const departingHandle = (await page.$x(destinationPicker.departing))[0];
@@ -94,8 +94,8 @@ describe(
 
       await page.click(checkoutForm.termsCheckbox);
       await page.waitForFunction(
-        (button) => !document.querySelector(button).disabled,
-        { timeout: 500 },
+        (selector) => !document.querySelector(selector).disabled,
+        { polling: 100 },
         checkoutForm.payNowBtn,
       );
 

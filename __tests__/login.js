@@ -131,7 +131,7 @@ describe(
     it('clears input field username when page is refreshed', async () => {
       await page.goto(`${baseUrl}/login`);
       let usernameInput = await page.$(login.usernameInput);
-      await usernameInput.type(user.username, { delay: 50 });
+      await usernameInput.type(user.username);
       let property = await usernameInput.getProperty('value');
       let value = await property.jsonValue();
       expect(value).toEqual(user.username);
@@ -146,7 +146,7 @@ describe(
     it('clears input field password when page is refreshed', async () => {
       await page.goto(`${baseUrl}/login`);
       let passwordInput = await page.$(login.passwordInput);
-      await passwordInput.type(user.password, { delay: 50 });
+      await passwordInput.type(user.password);
       let property = await passwordInput.getProperty('value');
       let value = await property.jsonValue();
       expect(value).toEqual(user.password);
@@ -161,7 +161,7 @@ describe(
     it('clears input if closed', async () => {
       await page.goto(`${baseUrl}/login`);
       let usernameInput = await page.$(login.usernameInput);
-      await usernameInput.type(user.username, { delay: 50 });
+      await usernameInput.type(user.username);
       let property = await usernameInput.getProperty('value');
       let value = await property.jsonValue();
       expect(value).toEqual(user.username);
@@ -181,10 +181,10 @@ describe(
     it('logs out properly', async () => {
       await page.goto(`${baseUrl}/login`);
       const usernameInput = await page.$(login.usernameInput);
-      await usernameInput.type(user.username, { delay: 50 });
+      await usernameInput.type(user.username);
 
       const passwordInput = await page.$(login.passwordInput);
-      await passwordInput.type(user.password, { delay: 50 });
+      await passwordInput.type(user.password);
 
       await page.hover(login.submitBtn);
       await page.mouse.down();

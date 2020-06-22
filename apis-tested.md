@@ -46,10 +46,10 @@
 27. page.authenticate(credentials)
 28. page.bringToFront()
 29. page.browser()
-30. page.browserContext()
-31. page.click(selector, options) :heavy_check_mark:
+30. page.browserContext() :heavy_check_mark:
+31. page.click(selector, options)
 32. page.close(options) :heavy_check_mark:
-33. page.content()
+33. page.content() :heavy_check_mark:
 34. page.cookies(...urls) :heavy_check_mark:
 35. page.coverage
 36. page.deleteCookie(...cookies) :heavy_check_mark:
@@ -57,7 +57,7 @@
 38. page.emulateMedia(type)
 39. page.emulateMediaFeatures(features)
 40. page.emulateMediaType(type)
-41. page.emulateTimezone(timezoneId)
+41. page.emulateTimezone(timezoneId) :heavy_check_mark:
 42. page.evaluate(pageFunction[, ...args]) :heavy_check_mark:
 43. page.evaluateHandle(pageFunction[, ...args]) :heavy_check_mark:
 44. page.evaluateOnNewDocument(pageFunction[, ...args])
@@ -67,7 +67,7 @@
 48. page.goBack(options) :heavy_check_mark:
 49. page.goForward(options) :heavy_check_mark:
 50. page.goto(url, options) :heavy_check_mark:
-51. page.hover(selector)
+51. page.hover(selector) :heavy_check_mark:
 52. page.isClosed() :heavy_check_mark:
 53. page.keyboard
 54. page.mainFrame()
@@ -80,18 +80,18 @@
 61. page.select(selector, ...values)
 62. page.setBypassCSP(enabled)
 63. page.setCacheEnabled(enabled)
-64. page.setContent(html, options)
+64. page.setContent(html, options) :heavy_check_mark:
 65. page.setCookie(...cookies) :heavy_check_mark:
 66. page.setDefaultNavigationTimeout(timeout) :heavy_check_mark:
 67. page.setDefaultTimeout(timeout) :heavy_check_mark:
 68. page.setExtraHTTPHeaders(headers)
 69. page.setGeolocation(options)
-70. page.setJavaScriptEnabled(enabled)
+70. page.setJavaScriptEnabled(enabled) :heavy_check_mark:
 71. page.setOfflineMode(enabled)
-72. page.setRequestInterception(value)
+72. page.setRequestInterception(value) :heavy_check_mark:
 73. page.setUserAgent(userAgent) :heavy_check_mark:
 74. page.setViewport(viewport) :heavy_check_mark:
-75. page.tap(selector)
+75. page.tap(selector) :heavy_check_mark:
 76. page.target()
 77. page.title() :heavy_check_mark:
 78. page.touchscreen
@@ -108,6 +108,7 @@
 89. page.waitForSelector(selector, options) :heavy_check_mark:
 90. page.waitForXPath(xpath, options) :heavy_check_mark:
 91. page.workers()
+92. page.isJavaScriptEnabled() :heavy_check_mark:
 
 ## class: Keyboard
 1. keyboard.down(key[, options]) :heavy_check_mark:
@@ -117,10 +118,10 @@
 5. keyboard.up(key[, options]) :heavy_check_mark:
 
 ## class: Mouse
-1. mouse.click(x, y[, options])
-2. mouse.down([options])
-3. mouse.move(x, y[, options])
-4. mouse.up([options])
+1. mouse.click(x, y[, options]) :heavy_check_mark:
+2. mouse.down([options]) :heavy_check_mark:
+3. mouse.move(x, y[, options]) :heavy_check_mark:
+4. mouse.up([options]) :heavy_check_mark:
 
 ## class: ElementHandle
 1. elementHandle.$(selector)]
@@ -129,7 +130,7 @@
 4. elementHandle.$eval(selector, pageFunction[, ...args])]
 5. elementHandle.$x(expression)]
 6. elementHandle.asElement()]
-7. elementHandle.boundingBox()]
+7. elementHandle.boundingBox()] :heavy_check_mark:
 8. elementHandle.boxModel()]
 9. elementHandle.click([options])]
 10. elementHandle.contentFrame()]

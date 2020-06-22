@@ -100,7 +100,7 @@
 81. page.url() :heavy_check_mark:
 82. page.viewport() :heavy_check_mark:
 83. page.waitFor(selectorOrFunctionOrTimeout[, options[, ...args]]) :heavy_check_mark:
-84. page.waitForFileChooser(options)
+84. page.waitForFileChooser(options) :heavy_check_mark:
 85. page.waitForFunction(pageFunction, [, options[, ...args]]) :heavy_check_mark:
 86. page.waitForNavigation(options) :heavy_check_mark:
 87. page.waitForRequest(urlOrPredicate, options)
@@ -150,4 +150,9 @@
 24. elementHandle.tap()] :heavy_check_mark:
 25. elementHandle.toString()]
 26. elementHandle.type(text[, options])]
-27. elementHandle.uploadFile(...filePaths)]
+27. elementHandle.uploadFile(...filePaths)] 1
+
+## class: FileChooser
+1. fileChooser.accept(filePaths) 1
+2. fileChooser.cancel() 1
+3. fileChooser.isMultiple() 1

@@ -3,6 +3,6 @@ module.exports = {
   globalTeardown: './teardown.js',
   testEnvironment: './puppeteer_environment.js',
   testMatch: ['**/__tests__/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
-  testTimeout: 10000,
+  testTimeout: 20000,
   maxWorkers: '50%',
 };

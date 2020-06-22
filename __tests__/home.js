@@ -8,17 +8,15 @@ describe(
   'Home page',
   () => {
     let page;
-    beforeAll(async () => {
+    beforeEach(async () => {
       page = await global.__BROWSER__.newPage();
       await page.setViewport({ width: 960, height: 800 });
       await page.setDefaultTimeout(timeout);
-    }, timeout);
-
-    beforeEach(async () => {
       await page.goto(baseUrl);
+      await page.waitForSelector(logo);
     }, timeout);
 
-    afterAll(async () => {
+    afterEach(async () => {
       await page.close();
     });
 

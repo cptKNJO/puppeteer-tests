@@ -9,8 +9,7 @@ const user = {
   name: faker.name.findName(),
   email: faker.internet.email(),
   ssn: '123-12-1234',
-  phone: faker.phone.phoneNumberFormat(1),
-  userAgent: faker.internet.userAgent(),
+  phone: faker.phone.phoneNumber(),
 };
 
 const pickDate = async (page, date, month) => {

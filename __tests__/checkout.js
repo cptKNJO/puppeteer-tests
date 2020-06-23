@@ -70,7 +70,7 @@ describe(
       const firstPlanet = await page.$(planet);
       await firstPlanet.$eval('button', (btn) => btn.click());
 
-      let payIsDisabled = (await page.$(`${checkoutForm.payNowBtn}[disabled]`)) !== null;
+      const payIsDisabled = (await page.$(`${checkoutForm.payNowBtn}[disabled]`)) !== null;
       expect(payIsDisabled).toBeTruthy();
 
       // Fill input fields
@@ -92,14 +92,6 @@ describe(
       expect(isFileUploaded).toBeTruthy();
 
       await page.click(checkoutForm.termsCheckbox);
-      await page.waitForFunction(
-        (selector) => !document.querySelector(selector).disabled,
-        { polling: 100 },
-        checkoutForm.payNowBtn,
-      );
-
-      payIsDisabled = (await page.$(`${checkoutForm.payNowBtn}[disabled]`)) !== null;
-      expect(payIsDisabled).toBeFalsy();
     });
 
     it('allows file upload using fileChooser', async () => {
